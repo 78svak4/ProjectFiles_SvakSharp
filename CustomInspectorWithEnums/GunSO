@@ -1,0 +1,39 @@
+using System;
+using UnityEngine;
+[CreateAssetMenu]
+public class GunSO : ItemSO
+{
+    public enum GunType 
+    {
+        normalGun,
+        shotgun,
+    }
+    [Serializable]
+    public struct NormalGun 
+    {
+        public int magazineAmount;
+        public float bulletSpeed;
+        public float fireRate;
+        public float bulletDamage;
+        public int bulletPierce;
+        public float bulletRotation;
+        public float reloadTime;
+    }
+
+    [Serializable]
+    public struct Shotgun 
+    {
+		public int magazineAmount;
+		public float bulletSpeed;
+		public float fireRate;
+		public float bulletDamage;
+		public int bulletPierce;
+		public int bulletsPerShot;
+        public float shotingRotation;
+        public float reloadTime;
+	}
+    [Header("Gun Info")]
+    public GunType type;
+    public NormalGun normalGun;
+    public Shotgun shotgun;
+}
