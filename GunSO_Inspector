@@ -1,0 +1,38 @@
+using UnityEditor;
+[CustomEditor(typeof(GunSO))]
+public class GunSO_Inspector : Editor
+{
+	GunSO gunSO;
+	SerializedProperty itemInfo;
+	SerializedProperty normalGun;
+	SerializedProperty shotgun;
+
+	private void OnEnable()
+	{
+		gunSO = target as GunSO;
+		normalGun = serializedObject.FindProperty("normalGun");
+		shotgun = serializedObject.FindProperty("shotgun");
+		itemInfo = serializedObject.FindProperty("itemInfo");
+	}
+	public override void OnInspectorGUI()
+	{
+		serializedObject.Update();
+
+
+		gunSO.type = (GunSO.GunType)EditorGUILayout.EnumPopup("Type", gunSO.type);
+		EditorGUILayout.PropertyField(itemInfo, true);
+
+		if (gunSO.type == GunSO.GunType.normalGun)
+		{
+			EditorGUILayout.PropertyField(normalGun, true);
+		}
+
+		if (gunSO.type == GunSO.GunType.shotgun)
+		{
+			EditorGUILayout.PropertyField(shotgun, true);
+		}
+		gunSO.bulletType = (Bullet.BulletType)EditorGUILayout.EnumPopup("Bullet Type", gunSO.bulletType);
+
+		serializedObject.ApplyModifiedProperties();
+	}
+}
